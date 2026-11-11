@@ -1061,7 +1061,7 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
 <script>
 var tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.ready(); tg.expand(); try { tg.setHeaderColor("#060505"); tg.setBackgroundColor("#060505"); if (tg.setBottomBarColor) tg.setBottomBarColor("#060505"); } catch (e) {} }
-var initData = tg ? tg.initData : "";
+var initData = (tg && tg.initData) || "demo";
 var SPLASH_T0 = Date.now();
 (function () {
   var T3 = { ar: "جارٍ التحقق من حسابك…", en: "Verifying your account…", ru: "Проверка вашего аккаунта…" };
