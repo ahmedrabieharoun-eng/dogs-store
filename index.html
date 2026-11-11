@@ -1046,11 +1046,16 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
     if (u.indexOf("/api/catalog") >= 0) return resp(CAT);
     if (u.indexOf("/api/recent") >= 0) return resp(RECENT);
     if (u.indexOf("/api/product") >= 0) {
-      var p = CAT.providers[0].items[0];
+      var pid = 0;
+      try { pid = Number(JSON.parse((opts && opts.body) || "{}").pid) || 0; } catch (e) {}
+      var found = null;
+      CAT.providers.forEach(function (pv) { pv.items.forEach(function (x) { if (x.id === pid) found = x; }); });
+      var p = found || CAT.providers[0].items[0];
       var full = {}; for (var k in p) full[k] = p[k];
-      full.desc = "\u0627\u0634\u062A\u0631\u0627\u0643 \u0628\u0631\u064A\u0645\u064A\u0648\u0645 \u0631\u0633\u0645\u064A \u064A\u064F\u0641\u0639\u0651\u0644 \u0639\u0644\u0649 \u062D\u0633\u0627\u0628\u0643 \u0645\u0628\u0627\u0634\u0631\u0629\u064B \u2014 \u062A\u0633\u0644\u064A\u0645 \u0641\u0648\u0631\u064A.";
+      full.desc = "\u0627\u0634\u062A\u0631\u0627\u0643 \u0631\u0633\u0645\u064A \u064A\u064F\u0641\u0639\u0651\u0644 \u0639\u0644\u0649 \u062D\u0633\u0627\u0628\u0643 \u0645\u0628\u0627\u0634\u0631\u0629\u064B \u2014 \u062A\u0633\u0644\u064A\u0645 \u0641\u0648\u0631\u064A.";
       return resp({ product: full });
     }
+    if (u.indexOf("/api/account") >= 0) return resp({ id: ME.id, name: ME.name, username: "ahmed", balance: ME.balance, buys: 3, dep_total: 250, spent: 124.5, tier: "bronze", vol: 40, silver: 100, gold: 500 });
     if (u.indexOf("/api/orders") >= 0) return resp({ items: [], orders: [] });
     if (u.indexOf("/api/") >= 0) return resp({ ok: true, items: [] });
     if (u.indexOf("/emoji/") >= 0) return Promise.resolve(new Response("", { status: 404 }));
