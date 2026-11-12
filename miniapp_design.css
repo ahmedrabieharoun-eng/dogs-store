@@ -481,3 +481,200 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
 .tnote{display:flex;gap:10.5px;align-items:flex-start;margin:20.5px 0 5px;padding:14px;font-size:13px;font-weight:700;line-height:1.8;color:#e7c97a;background:rgba(255,190,40,.09);border:1px solid rgba(255,190,40,.35);border-radius:19px}
 .tfoot{padding:10.5px 15.5px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#090706 30%)}
 .tbtn{display:block;width:100%;padding:14.5px;border:0;border-radius:859px;font-family:inherit;font-size:15px;font-weight:800;color:#241a08;background:#d4af37;cursor:pointer;box-shadow:0 7px 22.5px rgba(212,175,55,.3)}
+
+/* ==========================================================================
+   Dogs Store — طبقة Panda-faithful (تُضاف بعد miniapp_design.css)
+   نفس مكوّنات وتخطيط Panda Store الحرفي، بألوان الكلاب: أسود دافئ #060505،
+   أحمر #d92323 -> #8f0f14 (بدل تدرّج باندا الأزرق)، دهبي #d4af37 (بدل أخضر
+   باندا #10b981). أسماء pd- للمكوّنات الجديدة + إعادة تلوين للمشتركة.
+   ========================================================================== */
+:root{
+  --pd-red:#d92323; --pd-red2:#8f0f14; --pd-gold:#d4af37; --pd-gold2:#ffc247;
+  --pd-card:#100d0b; --pd-card2:#171310; --pd-line:#2a2016; --pd-line2:#3a2c1c;
+  --pd-tx:#f7f1e3; --pd-hint:#a89880; --pd-hint2:#7d6f5c;
+  --pd-grad:linear-gradient(135deg,#e02626,#8f0f14);
+  --pd-grad-gold:linear-gradient(135deg,#ffc247,#d4af37);
+  --pd-r:24px;
+}
+#view{max-width:1120px;margin:0 auto;width:100%}
+
+/* ---------- الهيدر اللاصق (باندا: شعار + بحث + سلة + دخول) ---------- */
+.pd-top{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:0 -10.5px;padding:10px 14px;background:rgba(6,5,5,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1.5px solid var(--pd-line)}
+.pd-brand{display:flex;align-items:center;gap:9px;min-width:0}
+.pd-mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex:0 0 auto;
+  background:var(--pd-card2);border:1.5px solid var(--pd-gold);box-shadow:0 0 0 3px rgba(212,175,55,.12)}
+.pd-brand h1{font-size:17px;font-weight:800;color:var(--pd-tx);white-space:nowrap}
+.pd-topact{display:flex;align-items:center;gap:8px}
+.pd-cart{position:relative;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--pd-line2);cursor:pointer;
+  background:var(--pd-card2);color:var(--pd-tx);font-size:17px;display:grid;place-items:center;font-family:inherit}
+.pd-cart b{position:absolute;top:-5px;inset-inline-end:-5px;min-width:19px;height:19px;border-radius:999px;background:var(--pd-grad);
+  color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 5px;border:2px solid #060505}
+
+/* ---------- شريط LIVE المتدفق (حبوب باندا المتحركة) ---------- */
+.pd-ticker{overflow:hidden;margin:10px -10.5px 2px;padding:2px 0;direction:ltr;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.pd-ttrack{display:inline-flex;gap:8px;white-space:nowrap;animation:pdScroll 36s linear infinite;will-change:transform}
+@keyframes pdScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pd-pill{display:inline-flex;align-items:center;gap:7px;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  border-radius:999px;padding:6px 12px;font-size:11.5px;color:var(--pd-hint);direction:rtl}
+.pd-pill i{width:7px;height:7px;border-radius:50%;background:var(--pd-gold);box-shadow:0 0 8px var(--pd-gold);flex:0 0 auto}
+
+/* ---------- شريط التنقّل السفلي العائم (زجاجي — توقيع باندا) ---------- */
+.nav.pd-nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:70;
+  max-width:560px;margin:0 auto;display:flex;gap:2px;padding:7px;border-radius:999px;
+  background:rgba(19,15,12,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1.5px solid var(--pd-line2);box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.nav.pd-nav>div{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:999px;
+  font-size:10.5px;color:var(--pd-hint);cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.nav.pd-nav>div.on{background:var(--pd-grad);color:#fff;box-shadow:0 6px 16px rgba(217,35,35,.35)}
+
+/* ---------- ترحيب + بحث كبير (باندا) ---------- */
+.pd-wel{margin:14px 0 10px}
+.pd-wel small{color:var(--pd-hint);font-size:12.5px}
+.pd-wel h2{font-size:20px;font-weight:800;color:var(--pd-tx);margin-top:2px;line-height:1.45}
+.pd-search{width:100%;background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:999px;color:var(--pd-tx);
+  padding:14px 18px;font-size:14px;font-family:inherit;outline:none;transition:border-color .25s}
+.pd-search:focus{border-color:var(--pd-gold)}
+.pd-search::placeholder{color:var(--pd-hint2)}
+
+/* ---------- صف الخدمات (بلاطات أقسام باندا) ---------- */
+.pd-svcrow{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0 4px}
+.pd-svc{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:20px;padding:13px 4px 10px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11.5px;color:var(--pd-tx);transition:all .25s}
+.pd-svc:active{transform:scale(.96)}
+.pd-sic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--pd-card2);border:1px solid var(--pd-line)}
+
+/* ---------- شرائح الأقسام بعدّادات (باندا) ---------- */
+.pd-chips{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px;scrollbar-width:none}
+.pd-chips::-webkit-scrollbar{display:none}
+.pd-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  color:var(--pd-tx);border-radius:999px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .25s}
+.pd-chip b{background:var(--pd-card2);border:1px solid var(--pd-line2);color:var(--pd-gold);border-radius:999px;
+  font-size:11px;padding:1px 8px;font-family:"JetBrains Mono",monospace}
+.pd-chip.on{background:var(--pd-grad);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(217,35,35,.3)}
+.pd-chip.on b{background:rgba(255,255,255,.18);border-color:transparent;color:#fff}
+
+/* ---------- البانر المميز (باندا) ---------- */
+.pd-banner{position:relative;display:flex;gap:10px;align-items:stretch;overflow:hidden;cursor:pointer;margin:14px 0 4px;
+  border-radius:var(--pd-r);border:1.5px solid var(--pd-line2);padding:16px;
+  background:radial-gradient(120% 160% at 85% 0%,rgba(217,35,35,.34),transparent 55%),linear-gradient(135deg,#1c0f0c,#0d0906)}
+.pd-btx{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.pd-btag{background:var(--pd-grad-gold);color:#241a08;font-weight:800;font-size:11px;border-radius:999px;padding:3px 10px}
+.pd-btx b{font-size:16.5px;color:var(--pd-tx);line-height:1.5}
+.pd-btx small{color:var(--pd-hint);font-size:12px}
+.pd-brow{display:flex;align-items:center;gap:12px;margin-top:6px}
+.pd-bprice{font-size:19px;font-weight:800;color:var(--pd-gold2);font-family:"JetBrains Mono",monospace}
+.pd-bbtn{background:var(--pd-grad);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-size:13.5px;font-weight:800;
+  font-family:inherit;cursor:pointer;box-shadow:0 8px 20px rgba(217,35,35,.35)}
+.pd-bart{width:104px;flex:0 0 auto;border-radius:18px;overflow:hidden;position:relative;border:1.5px solid var(--pd-gold)}
+.pd-bart .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-bart .plogo img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- شبكة وكروت المنتجات (تشريح كرت باندا) ---------- */
+.pd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px;margin-top:12px}
+.pd-card{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:var(--pd-r);overflow:hidden;cursor:pointer;
+  transition:transform .25s cubic-bezier(.4,0,.2,1),border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.pd-card:active{transform:scale(.98)}
+@media(hover:hover){.pd-card:hover{transform:translateY(-4px);border-color:var(--pd-gold);box-shadow:0 14px 30px rgba(212,175,55,.13)}}
+.pd-card.dim{opacity:.55}
+.pd-thumb{position:relative;aspect-ratio:1/1;border-bottom:2px solid var(--pd-gold);overflow:hidden}
+.pd-thumb .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-thumb .plogo img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+@media(hover:hover){.pd-card:hover .pd-thumb .plogo img{transform:scale(1.07)}}
+.pd-badge{position:absolute;top:9px;inset-inline-end:9px;z-index:2;background:var(--pd-gold);color:#241a08;font-size:10.5px;
+  font-weight:800;border-radius:999px;padding:3px 9px;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.pd-badge.out{background:#4a4238;color:#d8cfc0}
+.pd-bolt{position:absolute;bottom:9px;inset-inline-start:9px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+  background:rgba(6,5,5,.72);backdrop-filter:blur(6px);color:var(--pd-gold2);font-size:10.5px;font-weight:700;
+  border:1px solid var(--pd-line2);border-radius:999px;padding:3px 9px}
+.pd-cbody{padding:11px 12px 12px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pd-cname{font-size:13.5px;font-weight:700;color:var(--pd-tx);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;min-height:41px}
+.pd-cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.pd-price{font-size:15.5px;font-weight:800;color:var(--pd-tx);font-family:"JetBrains Mono",monospace;direction:ltr}
+.pd-add{width:35px;height:35px;border-radius:50%;border:0;background:var(--pd-grad);color:#fff;font-size:19px;font-weight:800;
+  cursor:pointer;display:grid;place-items:center;box-shadow:0 7px 16px rgba(217,35,35,.35);font-family:inherit;line-height:1}
+.pd-more{width:100%;margin-top:14px;background:transparent;border:1.5px solid var(--pd-line2);color:var(--pd-tx);border-radius:999px;
+  padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer}
+.pd-foot{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0 6px;color:var(--pd-hint2);font-size:12px}
+.pd-foot span{cursor:pointer}
+.pd-ptitle{margin:14px 0 2px}
+.pd-ptitle h2{font-size:19px;font-weight:800;color:var(--pd-tx)}
+.pd-ptitle small{color:var(--pd-hint);font-size:12px}
+.pd-tools{display:flex;gap:8px;align-items:center;margin-top:10px}
+.pd-tools .pd-search{flex:1}
+.pd-tbtn{flex:0 0 auto;min-width:46px;height:46px;padding:0 13px;border-radius:999px;background:var(--pd-card);
+  border:1.5px solid var(--pd-line);color:var(--pd-tx);display:grid;place-items:center;cursor:pointer;font-size:13px;font-family:inherit}
+.pd-tbtn.on{background:var(--pd-grad);border-color:transparent;color:#fff}
+.pd-lhead{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px}
+.pd-lhead b{color:var(--pd-tx);font-size:14.5px}
+.pd-lhead small{color:var(--pd-hint2);font-size:11.5px}
+
+/* ---------- نافذة المنتج (مودال باندا + سكة الخطوات + شريط شراء لاصق) ---------- */
+.sheet.pd-sheet{border-radius:26px 26px 0 0;border-top:1.5px solid var(--pd-line2);background:#0c0906;max-width:640px;margin:0 auto}
+.pd-pban{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:2px solid var(--pd-gold);margin-bottom:12px}
+.pd-pban .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-pban .plogo img{width:100%;height:100%;object-fit:cover}
+.pd-tagrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pd-tagrow .pd-off{background:var(--pd-card2);border:1px solid var(--pd-gold);color:var(--pd-gold2);border-radius:999px;
+  padding:4px 11px;font-size:11.5px;font-weight:700}
+.pd-tagrow .pd-rate{color:var(--pd-hint);font-size:12px}
+.pd-kv{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:18px;padding:4px 14px;margin-bottom:12px}
+.pd-kv .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--pd-line);font-size:13px}
+.pd-kv .row:last-child{border-bottom:0}
+.pd-kv .row span{color:var(--pd-hint)}
+.pd-kv .row b{color:var(--pd-tx);font-family:"JetBrains Mono",monospace;direction:ltr}
+.pd-steps{display:flex;align-items:center;gap:0;margin:4px 0 14px;direction:ltr}
+.pd-steps .st{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:var(--pd-hint2);width:64px;text-align:center}
+.pd-steps .st i{width:27px;height:27px;border-radius:50%;border:2px solid var(--pd-line2);display:grid;place-items:center;
+  font-style:normal;font-size:12px;background:var(--pd-card);color:var(--pd-hint)}
+.pd-steps .st.on{color:var(--pd-gold2)}
+.pd-steps .st.on i{background:var(--pd-grad);border-color:transparent;color:#fff;box-shadow:0 5px 13px rgba(217,35,35,.35)}
+.pd-steps .ln{flex:1;height:2px;background:var(--pd-line2);margin-bottom:17px}
+.pd-buybar{position:sticky;bottom:0;display:flex;gap:9px;padding:12px 0 calc(6px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,transparent,#0c0906 26%)}
+.btn.pd-buy{background:var(--pd-grad);box-shadow:0 10px 24px rgba(217,35,35,.35);border-radius:999px}
+.pd-cartempty{text-align:center;padding:28px 10px 20px;color:var(--pd-hint)}
+.pd-cartempty .big{font-size:52px;display:block;margin-bottom:8px;opacity:.9}
+
+/* ---------- الرصيد / حسابي / الطلبات (مشاهد باندا) ---------- */
+.pd-balcard{background:radial-gradient(130% 170% at 88% 0%,rgba(217,35,35,.3),transparent 55%),linear-gradient(135deg,#1a100c,#0d0906);
+  border:1.5px solid var(--pd-line2);border-radius:var(--pd-r);padding:18px 16px;margin-top:14px;text-align:center}
+.pd-balcard small{color:var(--pd-hint);font-size:12.5px}
+.pd-balcard b{display:block;font-size:31px;font-weight:800;color:var(--pd-tx);font-family:"JetBrains Mono",monospace;margin:5px 0 9px}
+.pd-acts{display:flex;gap:9px;justify-content:center;margin-top:13px}
+.pd-act{flex:1;max-width:150px;display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--pd-card);
+  border:1.5px solid var(--pd-line);border-radius:18px;padding:12px 4px 9px;font-size:11.5px;color:var(--pd-tx);cursor:pointer}
+.pd-act .ab{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:var(--pd-card2);border:1px solid var(--pd-line)}
+.pd-act.pri .ab{background:var(--pd-grad);border-color:transparent;box-shadow:0 7px 17px rgba(217,35,35,.35)}
+.pd-avatar{width:74px;height:74px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:29px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2.5px solid var(--pd-gold);box-shadow:0 10px 24px rgba(217,35,35,.3);overflow:hidden}
+.pd-avatar img{width:100%;height:100%;object-fit:cover}
+.pd-track{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:var(--pd-r);padding:15px;margin-top:14px}
+.pd-track h3{color:var(--pd-tx);font-size:15px;margin-bottom:10px}
+.pd-track .row2{display:flex;gap:8px}
+.pd-track input{flex:1;background:var(--pd-card2);border:1.5px solid var(--pd-line);border-radius:999px;color:var(--pd-tx);
+  padding:11px 15px;font-family:inherit;font-size:13px;outline:none;min-width:0}
+.pd-track input:focus{border-color:var(--pd-gold)}
+.pd-track button{background:var(--pd-grad);color:#fff;border:0;border-radius:999px;padding:11px 21px;font-weight:800;font-family:inherit;cursor:pointer}
+.pd-ocard{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  border-radius:20px;padding:13px 14px;margin-top:9px;cursor:pointer}
+.pd-ocard .nm{color:var(--pd-tx);font-weight:700;font-size:13.5px}
+.pd-ocard .sub{display:flex;gap:8px;color:var(--pd-hint2);font-size:11px;margin-top:4px;flex-wrap:wrap}
+.pd-ocard .pr{color:var(--pd-gold2);font-weight:800;font-family:"JetBrains Mono",monospace;direction:ltr}
+
+/* ---------- إعادة تلوين باندا للمكوّنات المشتركة (أزرار/كروت/شيتات) ---------- */
+.btn{border-radius:999px;background:var(--pd-grad);box-shadow:0 9px 22px rgba(217,35,35,.28)}
+.btn.ghost{background:transparent;border:1.5px solid var(--pd-line2);box-shadow:none;color:var(--pd-tx)}
+.card{border-radius:20px;border:1.5px solid var(--pd-line);background:var(--pd-card)}
+.sheet{border-radius:26px 26px 0 0;background:#0c0906;border-top:1.5px solid var(--pd-line2)}
+.chip{border-radius:999px}
+.chip.on{background:var(--pd-grad);color:#fff}
+.seg>div.on{background:var(--pd-grad);color:#fff}
+.stats3 .st3{border-radius:20px;border:1.5px solid var(--pd-line);background:var(--pd-card)}
+.lrow{border-radius:18px}
+.avatar{background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2px solid var(--pd-gold)}
+.sp-bar i{background:var(--pd-grad)}
+.tick{border:1.5px solid var(--pd-line);background:var(--pd-card);border-radius:999px}

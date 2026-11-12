@@ -495,6 +495,203 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
 .tfoot{padding:10.5px 15.5px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(180deg,transparent,#090706 30%)}
 .tbtn{display:block;width:100%;padding:14.5px;border:0;border-radius:859px;font-family:inherit;font-size:15px;font-weight:800;color:#241a08;background:#d4af37;cursor:pointer;box-shadow:0 7px 22.5px rgba(212,175,55,.3)}
 
+/* ==========================================================================
+   Dogs Store — طبقة Panda-faithful (تُضاف بعد miniapp_design.css)
+   نفس مكوّنات وتخطيط Panda Store الحرفي، بألوان الكلاب: أسود دافئ #060505،
+   أحمر #d92323 -> #8f0f14 (بدل تدرّج باندا الأزرق)، دهبي #d4af37 (بدل أخضر
+   باندا #10b981). أسماء pd- للمكوّنات الجديدة + إعادة تلوين للمشتركة.
+   ========================================================================== */
+:root{
+  --pd-red:#d92323; --pd-red2:#8f0f14; --pd-gold:#d4af37; --pd-gold2:#ffc247;
+  --pd-card:#100d0b; --pd-card2:#171310; --pd-line:#2a2016; --pd-line2:#3a2c1c;
+  --pd-tx:#f7f1e3; --pd-hint:#a89880; --pd-hint2:#7d6f5c;
+  --pd-grad:linear-gradient(135deg,#e02626,#8f0f14);
+  --pd-grad-gold:linear-gradient(135deg,#ffc247,#d4af37);
+  --pd-r:24px;
+}
+#view{max-width:1120px;margin:0 auto;width:100%}
+
+/* ---------- الهيدر اللاصق (باندا: شعار + بحث + سلة + دخول) ---------- */
+.pd-top{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:0 -10.5px;padding:10px 14px;background:rgba(6,5,5,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1.5px solid var(--pd-line)}
+.pd-brand{display:flex;align-items:center;gap:9px;min-width:0}
+.pd-mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:19px;flex:0 0 auto;
+  background:var(--pd-card2);border:1.5px solid var(--pd-gold);box-shadow:0 0 0 3px rgba(212,175,55,.12)}
+.pd-brand h1{font-size:17px;font-weight:800;color:var(--pd-tx);white-space:nowrap}
+.pd-topact{display:flex;align-items:center;gap:8px}
+.pd-cart{position:relative;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--pd-line2);cursor:pointer;
+  background:var(--pd-card2);color:var(--pd-tx);font-size:17px;display:grid;place-items:center;font-family:inherit}
+.pd-cart b{position:absolute;top:-5px;inset-inline-end:-5px;min-width:19px;height:19px;border-radius:999px;background:var(--pd-grad);
+  color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;padding:0 5px;border:2px solid #060505}
+
+/* ---------- شريط LIVE المتدفق (حبوب باندا المتحركة) ---------- */
+.pd-ticker{overflow:hidden;margin:10px -10.5px 2px;padding:2px 0;direction:ltr;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.pd-ttrack{display:inline-flex;gap:8px;white-space:nowrap;animation:pdScroll 36s linear infinite;will-change:transform}
+@keyframes pdScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pd-pill{display:inline-flex;align-items:center;gap:7px;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  border-radius:999px;padding:6px 12px;font-size:11.5px;color:var(--pd-hint);direction:rtl}
+.pd-pill i{width:7px;height:7px;border-radius:50%;background:var(--pd-gold);box-shadow:0 0 8px var(--pd-gold);flex:0 0 auto}
+
+/* ---------- شريط التنقّل السفلي العائم (زجاجي — توقيع باندا) ---------- */
+.nav.pd-nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:70;
+  max-width:560px;margin:0 auto;display:flex;gap:2px;padding:7px;border-radius:999px;
+  background:rgba(19,15,12,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1.5px solid var(--pd-line2);box-shadow:0 14px 34px rgba(0,0,0,.55)}
+.nav.pd-nav>div{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:999px;
+  font-size:10.5px;color:var(--pd-hint);cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1)}
+.nav.pd-nav>div.on{background:var(--pd-grad);color:#fff;box-shadow:0 6px 16px rgba(217,35,35,.35)}
+
+/* ---------- ترحيب + بحث كبير (باندا) ---------- */
+.pd-wel{margin:14px 0 10px}
+.pd-wel small{color:var(--pd-hint);font-size:12.5px}
+.pd-wel h2{font-size:20px;font-weight:800;color:var(--pd-tx);margin-top:2px;line-height:1.45}
+.pd-search{width:100%;background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:999px;color:var(--pd-tx);
+  padding:14px 18px;font-size:14px;font-family:inherit;outline:none;transition:border-color .25s}
+.pd-search:focus{border-color:var(--pd-gold)}
+.pd-search::placeholder{color:var(--pd-hint2)}
+
+/* ---------- صف الخدمات (بلاطات أقسام باندا) ---------- */
+.pd-svcrow{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0 4px}
+.pd-svc{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:20px;padding:13px 4px 10px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11.5px;color:var(--pd-tx);transition:all .25s}
+.pd-svc:active{transform:scale(.96)}
+.pd-sic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--pd-card2);border:1px solid var(--pd-line)}
+
+/* ---------- شرائح الأقسام بعدّادات (باندا) ---------- */
+.pd-chips{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 4px;scrollbar-width:none}
+.pd-chips::-webkit-scrollbar{display:none}
+.pd-chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  color:var(--pd-tx);border-radius:999px;padding:9px 14px;font-size:13px;cursor:pointer;transition:all .25s}
+.pd-chip b{background:var(--pd-card2);border:1px solid var(--pd-line2);color:var(--pd-gold);border-radius:999px;
+  font-size:11px;padding:1px 8px;font-family:"JetBrains Mono",monospace}
+.pd-chip.on{background:var(--pd-grad);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(217,35,35,.3)}
+.pd-chip.on b{background:rgba(255,255,255,.18);border-color:transparent;color:#fff}
+
+/* ---------- البانر المميز (باندا) ---------- */
+.pd-banner{position:relative;display:flex;gap:10px;align-items:stretch;overflow:hidden;cursor:pointer;margin:14px 0 4px;
+  border-radius:var(--pd-r);border:1.5px solid var(--pd-line2);padding:16px;
+  background:radial-gradient(120% 160% at 85% 0%,rgba(217,35,35,.34),transparent 55%),linear-gradient(135deg,#1c0f0c,#0d0906)}
+.pd-btx{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.pd-btag{background:var(--pd-grad-gold);color:#241a08;font-weight:800;font-size:11px;border-radius:999px;padding:3px 10px}
+.pd-btx b{font-size:16.5px;color:var(--pd-tx);line-height:1.5}
+.pd-btx small{color:var(--pd-hint);font-size:12px}
+.pd-brow{display:flex;align-items:center;gap:12px;margin-top:6px}
+.pd-bprice{font-size:19px;font-weight:800;color:var(--pd-gold2);font-family:"JetBrains Mono",monospace}
+.pd-bbtn{background:var(--pd-grad);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-size:13.5px;font-weight:800;
+  font-family:inherit;cursor:pointer;box-shadow:0 8px 20px rgba(217,35,35,.35)}
+.pd-bart{width:104px;flex:0 0 auto;border-radius:18px;overflow:hidden;position:relative;border:1.5px solid var(--pd-gold)}
+.pd-bart .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-bart .plogo img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- شبكة وكروت المنتجات (تشريح كرت باندا) ---------- */
+.pd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px;margin-top:12px}
+.pd-card{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:var(--pd-r);overflow:hidden;cursor:pointer;
+  transition:transform .25s cubic-bezier(.4,0,.2,1),border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.pd-card:active{transform:scale(.98)}
+@media(hover:hover){.pd-card:hover{transform:translateY(-4px);border-color:var(--pd-gold);box-shadow:0 14px 30px rgba(212,175,55,.13)}}
+.pd-card.dim{opacity:.55}
+.pd-thumb{position:relative;aspect-ratio:1/1;border-bottom:2px solid var(--pd-gold);overflow:hidden}
+.pd-thumb .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-thumb .plogo img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+@media(hover:hover){.pd-card:hover .pd-thumb .plogo img{transform:scale(1.07)}}
+.pd-badge{position:absolute;top:9px;inset-inline-end:9px;z-index:2;background:var(--pd-gold);color:#241a08;font-size:10.5px;
+  font-weight:800;border-radius:999px;padding:3px 9px;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.pd-badge.out{background:#4a4238;color:#d8cfc0}
+.pd-bolt{position:absolute;bottom:9px;inset-inline-start:9px;z-index:2;display:inline-flex;align-items:center;gap:4px;
+  background:rgba(6,5,5,.72);backdrop-filter:blur(6px);color:var(--pd-gold2);font-size:10.5px;font-weight:700;
+  border:1px solid var(--pd-line2);border-radius:999px;padding:3px 9px}
+.pd-cbody{padding:11px 12px 12px;display:flex;flex-direction:column;gap:9px;flex:1}
+.pd-cname{font-size:13.5px;font-weight:700;color:var(--pd-tx);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;overflow:hidden;min-height:41px}
+.pd-cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.pd-price{font-size:15.5px;font-weight:800;color:var(--pd-tx);font-family:"JetBrains Mono",monospace;direction:ltr}
+.pd-add{width:35px;height:35px;border-radius:50%;border:0;background:var(--pd-grad);color:#fff;font-size:19px;font-weight:800;
+  cursor:pointer;display:grid;place-items:center;box-shadow:0 7px 16px rgba(217,35,35,.35);font-family:inherit;line-height:1}
+.pd-more{width:100%;margin-top:14px;background:transparent;border:1.5px solid var(--pd-line2);color:var(--pd-tx);border-radius:999px;
+  padding:12px;font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer}
+.pd-foot{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0 6px;color:var(--pd-hint2);font-size:12px}
+.pd-foot span{cursor:pointer}
+.pd-ptitle{margin:14px 0 2px}
+.pd-ptitle h2{font-size:19px;font-weight:800;color:var(--pd-tx)}
+.pd-ptitle small{color:var(--pd-hint);font-size:12px}
+.pd-tools{display:flex;gap:8px;align-items:center;margin-top:10px}
+.pd-tools .pd-search{flex:1}
+.pd-tbtn{flex:0 0 auto;min-width:46px;height:46px;padding:0 13px;border-radius:999px;background:var(--pd-card);
+  border:1.5px solid var(--pd-line);color:var(--pd-tx);display:grid;place-items:center;cursor:pointer;font-size:13px;font-family:inherit}
+.pd-tbtn.on{background:var(--pd-grad);border-color:transparent;color:#fff}
+.pd-lhead{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px}
+.pd-lhead b{color:var(--pd-tx);font-size:14.5px}
+.pd-lhead small{color:var(--pd-hint2);font-size:11.5px}
+
+/* ---------- نافذة المنتج (مودال باندا + سكة الخطوات + شريط شراء لاصق) ---------- */
+.sheet.pd-sheet{border-radius:26px 26px 0 0;border-top:1.5px solid var(--pd-line2);background:#0c0906;max-width:640px;margin:0 auto}
+.pd-pban{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:2px solid var(--pd-gold);margin-bottom:12px}
+.pd-pban .plogo{position:absolute;inset:0;display:grid;place-items:center}
+.pd-pban .plogo img{width:100%;height:100%;object-fit:cover}
+.pd-tagrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pd-tagrow .pd-off{background:var(--pd-card2);border:1px solid var(--pd-gold);color:var(--pd-gold2);border-radius:999px;
+  padding:4px 11px;font-size:11.5px;font-weight:700}
+.pd-tagrow .pd-rate{color:var(--pd-hint);font-size:12px}
+.pd-kv{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:18px;padding:4px 14px;margin-bottom:12px}
+.pd-kv .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--pd-line);font-size:13px}
+.pd-kv .row:last-child{border-bottom:0}
+.pd-kv .row span{color:var(--pd-hint)}
+.pd-kv .row b{color:var(--pd-tx);font-family:"JetBrains Mono",monospace;direction:ltr}
+.pd-steps{display:flex;align-items:center;gap:0;margin:4px 0 14px;direction:ltr}
+.pd-steps .st{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:var(--pd-hint2);width:64px;text-align:center}
+.pd-steps .st i{width:27px;height:27px;border-radius:50%;border:2px solid var(--pd-line2);display:grid;place-items:center;
+  font-style:normal;font-size:12px;background:var(--pd-card);color:var(--pd-hint)}
+.pd-steps .st.on{color:var(--pd-gold2)}
+.pd-steps .st.on i{background:var(--pd-grad);border-color:transparent;color:#fff;box-shadow:0 5px 13px rgba(217,35,35,.35)}
+.pd-steps .ln{flex:1;height:2px;background:var(--pd-line2);margin-bottom:17px}
+.pd-buybar{position:sticky;bottom:0;display:flex;gap:9px;padding:12px 0 calc(6px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,transparent,#0c0906 26%)}
+.btn.pd-buy{background:var(--pd-grad);box-shadow:0 10px 24px rgba(217,35,35,.35);border-radius:999px}
+.pd-cartempty{text-align:center;padding:28px 10px 20px;color:var(--pd-hint)}
+.pd-cartempty .big{font-size:52px;display:block;margin-bottom:8px;opacity:.9}
+
+/* ---------- الرصيد / حسابي / الطلبات (مشاهد باندا) ---------- */
+.pd-balcard{background:radial-gradient(130% 170% at 88% 0%,rgba(217,35,35,.3),transparent 55%),linear-gradient(135deg,#1a100c,#0d0906);
+  border:1.5px solid var(--pd-line2);border-radius:var(--pd-r);padding:18px 16px;margin-top:14px;text-align:center}
+.pd-balcard small{color:var(--pd-hint);font-size:12.5px}
+.pd-balcard b{display:block;font-size:31px;font-weight:800;color:var(--pd-tx);font-family:"JetBrains Mono",monospace;margin:5px 0 9px}
+.pd-acts{display:flex;gap:9px;justify-content:center;margin-top:13px}
+.pd-act{flex:1;max-width:150px;display:flex;flex-direction:column;align-items:center;gap:7px;background:var(--pd-card);
+  border:1.5px solid var(--pd-line);border-radius:18px;padding:12px 4px 9px;font-size:11.5px;color:var(--pd-tx);cursor:pointer}
+.pd-act .ab{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:var(--pd-card2);border:1px solid var(--pd-line)}
+.pd-act.pri .ab{background:var(--pd-grad);border-color:transparent;box-shadow:0 7px 17px rgba(217,35,35,.35)}
+.pd-avatar{width:74px;height:74px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:29px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2.5px solid var(--pd-gold);box-shadow:0 10px 24px rgba(217,35,35,.3);overflow:hidden}
+.pd-avatar img{width:100%;height:100%;object-fit:cover}
+.pd-track{background:var(--pd-card);border:1.5px solid var(--pd-line);border-radius:var(--pd-r);padding:15px;margin-top:14px}
+.pd-track h3{color:var(--pd-tx);font-size:15px;margin-bottom:10px}
+.pd-track .row2{display:flex;gap:8px}
+.pd-track input{flex:1;background:var(--pd-card2);border:1.5px solid var(--pd-line);border-radius:999px;color:var(--pd-tx);
+  padding:11px 15px;font-family:inherit;font-size:13px;outline:none;min-width:0}
+.pd-track input:focus{border-color:var(--pd-gold)}
+.pd-track button{background:var(--pd-grad);color:#fff;border:0;border-radius:999px;padding:11px 21px;font-weight:800;font-family:inherit;cursor:pointer}
+.pd-ocard{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--pd-card);border:1.5px solid var(--pd-line);
+  border-radius:20px;padding:13px 14px;margin-top:9px;cursor:pointer}
+.pd-ocard .nm{color:var(--pd-tx);font-weight:700;font-size:13.5px}
+.pd-ocard .sub{display:flex;gap:8px;color:var(--pd-hint2);font-size:11px;margin-top:4px;flex-wrap:wrap}
+.pd-ocard .pr{color:var(--pd-gold2);font-weight:800;font-family:"JetBrains Mono",monospace;direction:ltr}
+
+/* ---------- إعادة تلوين باندا للمكوّنات المشتركة (أزرار/كروت/شيتات) ---------- */
+.btn{border-radius:999px;background:var(--pd-grad);box-shadow:0 9px 22px rgba(217,35,35,.28)}
+.btn.ghost{background:transparent;border:1.5px solid var(--pd-line2);box-shadow:none;color:var(--pd-tx)}
+.card{border-radius:20px;border:1.5px solid var(--pd-line);background:var(--pd-card)}
+.sheet{border-radius:26px 26px 0 0;background:#0c0906;border-top:1.5px solid var(--pd-line2)}
+.chip{border-radius:999px}
+.chip.on{background:var(--pd-grad);color:#fff}
+.seg>div.on{background:var(--pd-grad);color:#fff}
+.stats3 .st3{border-radius:20px;border:1.5px solid var(--pd-line);background:var(--pd-card)}
+.lrow{border-radius:18px}
+.avatar{background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2px solid var(--pd-gold)}
+.sp-bar i{background:var(--pd-grad)}
+.tick{border:1.5px solid var(--pd-line);background:var(--pd-card);border-radius:999px}
+
 </style>
 </head>
 <body>
@@ -504,9 +701,18 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
   <div class="sp-msg" id="sp-msg">جارٍ التحقق من حسابك…</div>
   <div class="sp-bar"><i></i></div>
 </div></div>
-<div class="top"><h1 id="title">Dogs Store</h1><div style="display:flex;gap:8px"><div class="bal" id="cfg">⚙</div><div class="bal" id="bal">$0.00</div><div class="bal" id="wc" style="display:none"><span id="wce"></span><span id="wct"></span></div></div></div>
+<header class="pd-top">
+  <div class="pd-brand"><span class="pd-mark">🐶</span><h1 id="title">Dogs Store</h1></div>
+  <div class="pd-topact">
+    <div class="bal" id="bal">$0.00</div>
+    <div class="bal" id="wc" style="display:none"><span id="wce"></span><span id="wct"></span></div>
+    <button class="pd-cart" id="pdCart" type="button">🛍<b id="cartn" style="display:none">0</b></button>
+    <div class="bal" id="cfg">⚙</div>
+  </div>
+</header>
+<div class="pd-ticker"><div class="pd-ttrack" id="pdTicker"></div></div>
 <div id="view"></div>
-<div class="nav"><div id="n-home" class="on">الرئيسية</div><div id="n-store">المنتجات</div><div id="n-wallet">المحفظة</div><div id="n-account">حسابي</div><div id="n-api" style="display:none">API</div><div id="n-admin" style="display:none">الإدارة</div></div>
+<div class="nav pd-nav"><div id="n-home" class="on">الرئيسية</div><div id="n-store">المنتجات</div><div id="n-wallet">المحفظة</div><div id="n-account">حسابي</div><div id="n-api" style="display:none">API</div><div id="n-admin" style="display:none">الإدارة</div></div>
 <div class="sup" id="sup"><span id="supe"></span><span id="supt">الدعم</span></div>
 
 <script>
@@ -1417,19 +1623,44 @@ async function tickerView(box) {
   tm = setInterval(show, 3800); show();
 }
 function renderHome(v) {
-  var tkb = el("div"); v.appendChild(tkb); tickerView(tkb);
+  pdTickerFill();
   if (!S.me) { for (var i = 0; i < 3; i++) v.appendChild(el("div", { class: "sk" })); return; }
-  v.appendChild(el("div", { class: "hero" }, el("small", { text: "أهلًا " + (S.me.name || "") }), el("b", { text: money(S.me.balance) }),
-    el("button", { class: "btn", text: "شحن الرصيد", onclick: function () { buzz(); tab("wallet"); } })));
-  var tl = el("div", { class: "tagline" }, el("span", { class: "tt" }), el("span", { class: "caret" }));
-  v.appendChild(tl); typeLoop(tl.firstChild);
-  var g = el("div", { class: "grid" });
-  g.appendChild(tile(ic("stars", "⭐"), "شراء نجوم", function () { sub(function (x) { buyView(x, "stars"); }); }, "anim-star"));
-  g.appendChild(tile(ic("premium", "💫"), "بريميوم", function () { sub(function (x) { buyView(x, "premium"); }); }));
-  g.appendChild(tile(ic("ton", "💎"), "شراء TON", function () { sub(tonBuyView); }));
-  g.appendChild(tile(ic("store", "🛍"), "المنتجات", function () { tab("store"); }));
-  g.appendChild(tile(ic("sell", "🔁"), "بيع نجوم", function () { sub(sellView); }, "wide"));
-  v.appendChild(g);
+  var nm = S.me.name ? " " + S.me.name : "";
+  v.appendChild(el("div", { class: "pd-wel" }, el("small", { text: "أهلاً" + nm }), el("h2", { text: "إيه اللي تحب تشتريه النهارده؟" })));
+  var inp = el("input", { class: "pd-search", placeholder: "ابحث عن منتجات، ألعاب، أو اشتراكات..." });
+  inp.addEventListener("focus", function () { if (S.tab !== "store") tab("store"); });
+  v.appendChild(inp);
+  var sv = el("div", { class: "pd-svcrow" });
+  sv.appendChild(pdSvc("stars", "⭐", "شراء نجوم", function () { sub(function (x) { buyView(x, "stars"); }); }));
+  sv.appendChild(pdSvc("premium", "💫", "بريميوم", function () { sub(function (x) { buyView(x, "premium"); }); }));
+  sv.appendChild(pdSvc("ton", "💎", "شراء TON", function () { sub(tonBuyView); }));
+  sv.appendChild(pdSvc("sell", "🔁", "بيع نجوم", function () { sub(sellView); }));
+  v.appendChild(sv);
+  if (!S.cat) { v.appendChild(el("div", { class: "sk" })); return; }
+  if (S.cat.hidden || !S.cat.providers.length) { v.appendChild(el("div", { class: "empty", text: S.cat.hidden ? "المتجر سيُفتح قريبًا." : "لا توجد منتجات متاحة حاليًا." })); return; }
+  var total = 0; S.cat.providers.forEach(function (p) { total += p.items.length; });
+  var chips = el("div", { class: "pd-chips" });
+  function hchip(id, label, n) { chips.appendChild(el("div", { class: "pd-chip" + (S.prov === id ? " on" : ""), onclick: function () { S.prov = id; S.lim = 30; buzz(); tab("store"); } }, el("span", { text: label }), el("b", { text: String(n) }))); }
+  hchip(0, "الكل", total);
+  S.cat.providers.forEach(function (p) { hchip(p.id, ((p.emoji || "") + " " + p.name).trim(), p.items.length); });
+  v.appendChild(chips);
+  var feat = null;
+  S.cat.providers.forEach(function (p) { p.items.forEach(function (it) { if (!feat && it.in_stock) feat = it; }); });
+  if (feat) {
+    var fb = el("div", { class: "pd-banner", onclick: function () { buzz(); openProduct(feat.id); } },
+      el("div", { class: "pd-btx" }, el("span", { class: "pd-btag", text: "⚡ عرض مميز" }), el("b", { text: feat.name }), el("small", { text: feat.delivery || "تسليم فوري" }),
+        el("div", { class: "pd-brow" }, el("span", { class: "pd-bprice", text: money(feat.price) }), el("button", { class: "pd-bbtn", text: "اشترِ الآن", onclick: function (e) { e.stopPropagation(); buzz(); openProduct(feat.id); } }))));
+    fb.appendChild(pThumb(feat, "pd-bart"));
+    v.appendChild(fb);
+  }
+  var grid = el("div", { class: "pd-grid" }); v.appendChild(grid);
+  var n = 0;
+  S.cat.providers.forEach(function (p) { p.items.forEach(function (it) { if (n < 6) { grid.appendChild(pdCard(it)); n++; } }); });
+  v.appendChild(el("button", { class: "pd-more", text: "كل المنتجات", onclick: function () { tab("store"); } }));
+  v.appendChild(el("div", { class: "pd-foot" },
+    el("span", { text: "القناة الرسمية", onclick: function () { oLink(S.me.channel || S.me.support); } }),
+    el("span", { text: "الدعم الفني", onclick: function () { oLink(S.me.support); } }),
+    el("span", { text: "© " + (S.me.title || "Dogs Store") })));
 }
 function linkBtns(link, shareFn) {
   var st = "margin:0;width:auto;flex:1;padding:8px 10px;font-size:13px;border-radius:12px";
@@ -1614,42 +1845,60 @@ async function renderOrders(v, svc) {
   var d; try { d = await api("orders"); } catch (e) { return fail(e); }
   v.innerHTML = "";
   if (svc) d.items = d.items.filter(function (o) { return o.svc === svc; });
+  var spent = 0; d.items.forEach(function (o) { if (o.sk === "done") spent += Number(o.usd || 0); });
+  var tInp = el("input", { placeholder: "رقم الطلب — مثال FP-512" });
+  var tMsg = el("div");
+  var track = el("div", { class: "pd-track" }, el("h3", { text: "📋 تتبع الطلبات" }),
+    el("div", { class: "row2" }, tInp, el("button", { text: "تتبع", onclick: function () {
+      var q = tInp.value.replace(/[^0-9]/g, ""); tMsg.innerHTML = "";
+      var f = d.items.filter(function (o) { return String(o.id) === q; })[0];
+      if (f) { buzz(); trackSheet(f); } else tMsg.appendChild(toast("الطلب غير موجود في قائمتك.", "bad"));
+    } })), tMsg);
+  v.appendChild(track);
+  v.appendChild(el("div", { class: "stats3", style: "margin-top:12px" },
+    el("div", { class: "st3" }, el("small", { text: "طلباتي" }), el("b", { text: String(d.items.length) })),
+    el("div", { class: "st3" }, el("small", { text: "المصروف" }), el("b", { text: money(spent) }))));
+  v.appendChild(el("button", { class: "pd-more", text: "⬇ تنزيل كل المشتريات", onclick: function () {
+    try {
+      var lines = d.items.map(function (o) { return "FP-" + o.id + " | " + o.service + " — " + o.item + " | " + o.status + " | " + money(o.usd) + " | " + o.date; });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/plain" }));
+      a.download = "dogs-store-orders.txt"; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    } catch (e) {}
+  } }));
   var cur = S.osk || "all";
   var cnt = { all: d.items.length, pending: 0, done: 0, rejected: 0, cancelled: 0 };
   d.items.forEach(function (o) { cnt[o.sk] = (cnt[o.sk] || 0) + 1; });
-  var tabs = el("div", { class: "seg scroll" }); v.appendChild(tabs);
+  var tabs = el("div", { class: "pd-chips" }); v.appendChild(tabs);
   var box = el("div"); v.appendChild(box);
   function draw() {
     tabs.innerHTML = "";
     OSK.forEach(function (it) {
-      var d2 = el("div", { class: cur === it[0] ? "on" : "", onclick: function () { cur = S.osk = it[0]; buzz(); draw(); } });
-      if (it[2]) d2.appendChild(eico(ic(it[2], it[3]), 18, true));
-      d2.appendChild(el("span", { text: it[1] })); d2.appendChild(el("em", { text: String(cnt[it[0]] || 0) }));
-      tabs.appendChild(d2);
+      tabs.appendChild(el("div", { class: "pd-chip" + (cur === it[0] ? " on" : ""), onclick: function () { cur = S.osk = it[0]; buzz(); draw(); } },
+        el("span", { text: it[1] }), el("b", { text: String(cnt[it[0]] || 0) })));
     });
     box.innerHTML = "";
     var arr = d.items.filter(function (o) { return cur === "all" || o.sk === cur; });
     if (!arr.length) return box.appendChild(el("div", { class: "empty", text: "لا توجد طلبات هنا." }));
-    arr.forEach(function (o) { box.appendChild(ordCard(o)); });
+    arr.forEach(function (o) { box.appendChild(pdOrdCard(o)); });
   }
   draw();
 }
 async function renderWallet(v) {
   var hb = el("b", { text: money(S.me.balance) });
   async function refreshBal() { try { S.me = Object.assign(S.me, await api("state")); setBal(); render(); } catch (e) {} }
-  function act(key, g, label, fn, pri) { return el("div", { class: "act" }, el("div", { class: "ab" + (pri ? " pri" : ""), onclick: function () { buzz(); fn(); } }, eico(ic(key, g), 30)), el("span", { text: label })); }
-  v.appendChild(el("div", { class: "whero" },
-    el("div", { class: "wcard" }, eico(ic("wallet", "💳"), 64)),
-    el("small", { text: "الرصيد المتاح" }), hb,
+  function act(key, g, label, fn, pri) { return el("div", { class: "pd-act" + (pri ? " pri" : ""), onclick: function () { buzz(); fn(); } }, el("div", { class: "ab" }, eico(ic(key, g), 26)), el("span", { text: label })); }
+  v.appendChild(el("div", { class: "pd-balcard" },
+    el("small", { text: "رصيدي المتاح" }), hb,
     el("div", { class: "idchip", onclick: function () { copy(String(S.me.id)); } }, el("span", { text: "ID " + S.me.id }), el("span", { text: " ⧉" })),
-    el("div", { class: "acts" },
+    el("div", { class: "pd-acts" },
       act("topup", "➕", "شحن الرصيد", function () { sub(topupView); }, true),
       act("hist", "🧾", "السجل", function () { sub(historyView); }),
       act("refresh", "🔄", "تحديث", refreshBal))));
-  v.appendChild(el("div", { class: "lbl", style: "text-align:center;margin:-2px 0 10px", text: "الرصيد يُستخدم في: " + ({ all: "المنتجات + خدمات تيليجرام", products: "المنتجات فقط", telegram: "خدمات تيليجرام فقط" }[S.me.wscope] || "المنتجات فقط") }));
+  v.appendChild(el("div", { class: "lbl", style: "text-align:center;margin:12px 0 2px", text: "الرصيد يُستخدم في: " + ({ all: "المنتجات + خدمات تيليجرام", products: "المنتجات فقط", telegram: "خدمات تيليجرام فقط" }[S.me.wscope] || "المنتجات فقط") }));
   var stat = el("div", { class: "stats3" }); v.appendChild(stat);
   function sc(c, label, val) { return el("div", { class: "st3" }, el("small", null, el("i", { style: "background:" + c }), " " + label), el("b", { text: val })); }
-  function fill(a) { stat.innerHTML = ""; stat.appendChild(sc("#22c55e", "إجمالي الشحن", money(a.dep_total))); stat.appendChild(sc("#f0645c", "المصروف", money(a.spent))); stat.appendChild(sc("#7c5cff", "المشتريات", String(a.buys))); }
+  function fill(a) { stat.innerHTML = ""; stat.appendChild(sc("#d4af37", "إجمالي الشحن", money(a.dep_total))); stat.appendChild(sc("#f0645c", "المصروف", money(a.spent))); stat.appendChild(sc("#d92323", "المشتريات", String(a.buys))); }
   fill({ dep_total: 0, spent: 0, buys: 0 });
   api("account").then(fill).catch(function () {});
 }
@@ -1739,24 +1988,25 @@ function cartAdd(it, qty) {
   buzz("medium"); var b = document.getElementById("cartn"); if (b) { b.textContent = String(cartCount()); b.style.display = "grid"; }
 }
 function renderStore(v) {
+  pdTickerFill();
   if (!S.cat) { for (var i = 0; i < 4; i++) v.appendChild(el("div", { class: "sk" })); return; }
   if (S.cat.hidden || !S.cat.providers.length) { v.appendChild(el("div", { class: "empty", text: S.cat.hidden ? "المتجر سيُفتح قريبًا." : "لا توجد منتجات متاحة حاليًا." })); return; }
   var total = 0; S.cat.providers.forEach(function (p) { total += p.items.length; });
-  var nm = (S.me && S.me.name) ? " " + S.me.name : "";
-  var cartBtn = el("div", { class: "cartb", onclick: function () { buzz(); cartSheet(); } }, el("span", null, eico(ic("cart", "🛍"), 28)), el("b", { id: "cartn", text: String(cartCount()), style: "display:" + (cartCount() ? "grid" : "none") }));
-  v.appendChild(el("div", { class: "hello" }, el("div", { class: "ht" }, el("small", { text: "أهلاً" + nm }), el("h2", { text: "إيه اللي تحب تشتريه النهارده؟" })), cartBtn));
-  var inp = el("input", { class: "search", placeholder: "ابحث عن منتج...", value: S.q, style: "margin:0;flex:1;min-width:0" });
+  var pname0 = "كل المنتجات";
+  S.cat.providers.forEach(function (p) { if (S.prov === p.id) pname0 = ((p.emoji || "") + " " + p.name).trim(); });
+  v.appendChild(el("div", { class: "pd-ptitle" }, el("h2", { text: pname0 }), el("small", { text: total + " منتج في المتجر" })));
+  var inp = el("input", { class: "pd-search", placeholder: "ابحث عن منتج...", value: S.q });
   inp.addEventListener("input", function () { S.q = inp.value; S.lim = 30; list(); });
-  var sortB = el("div", { class: "pbtn", text: "⇅", onclick: function () { S.sort = (S.sort + 1) % 3; buzz(); sortB.title = SORTS[S.sort]; list(); } });
-  var avB = el("div", { class: "pbtn wide" + (S.avail ? " on" : ""), onclick: function () { S.avail = !S.avail; S.lim = 30; avB.className = "pbtn wide" + (S.avail ? " on" : ""); buzz(); list(); } }, el("span", { text: "المتوفر" }), eico(ic("avail", "✅"), 20, true));
-  v.appendChild(el("div", { class: "tools" }, sortB, avB, inp));
-  var chips = el("div", { class: "chips" });
-  function chip(id, label, n) { chips.appendChild(el("div", { class: "chip pchip" + (S.prov === id ? " on" : ""), onclick: function () { S.prov = id; S.lim = 30; buzz(); render(); } }, el("span", { class: "cn", text: String(n) }), el("span", { text: label }))); }
+  var sortB = el("button", { class: "pd-tbtn", text: "⇅", title: SORTS[S.sort], onclick: function () { S.sort = (S.sort + 1) % 3; buzz(); sortB.title = SORTS[S.sort]; list(); } });
+  var avB = el("button", { class: "pd-tbtn" + (S.avail ? " on" : ""), text: "المتوفر ✓", onclick: function () { S.avail = !S.avail; S.lim = 30; avB.className = "pd-tbtn" + (S.avail ? " on" : ""); buzz(); list(); } });
+  v.appendChild(el("div", { class: "pd-tools" }, inp, sortB, avB));
+  var chips = el("div", { class: "pd-chips" });
+  function chip(id, label, n) { chips.appendChild(el("div", { class: "pd-chip" + (S.prov === id ? " on" : ""), onclick: function () { S.prov = id; S.lim = 30; buzz(); render(); } }, el("span", { text: label }), el("b", { text: String(n) }))); }
   chip(0, "الكل", total);
   S.cat.providers.forEach(function (p) { chip(p.id, ((p.emoji || "") + " " + p.name).trim(), p.items.length); });
   v.appendChild(chips);
-  var head = el("div", { class: "lhead" }); v.appendChild(head);
-  var box = el("div", { class: "pgrid" }); v.appendChild(box);
+  var head = el("div", { class: "pd-lhead" }); v.appendChild(head);
+  var box = el("div", { class: "pd-grid" }); v.appendChild(box);
   function list() {
     box.innerHTML = ""; head.innerHTML = "";
     var q = S.q.trim().toLowerCase(), arr = [], pname = "";
@@ -1771,16 +2021,9 @@ function renderStore(v) {
     });
     arr.sort(function (a, b) { return S.sort === 1 ? a.price - b.price : S.sort === 2 ? b.price - a.price : a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1; });
     head.appendChild(el("b", { text: pname || "الكل" })); head.appendChild(el("small", { text: SORTS[S.sort] + " • " + arr.length }));
-    arr.slice(0, S.lim).forEach(function (it) {
-      var th = pThumb(it);
-      th.appendChild(el("span", { class: "pdl" }, eico(ic("bolt", "⚡"), 18, true)));
-      th.appendChild(pStock(it));
-      var add = el("div", { class: "padd", text: "+", onclick: function (e) { e.stopPropagation(); if (!it.in_stock) return; cartAdd(it, 1); } });
-      box.appendChild(el("div", { class: "pcard" + (it.in_stock ? "" : " dim"), onclick: function () { buzz(); openProduct(it.id); } }, th,
-        el("div", { class: "pbody" }, el("div", { class: "pname", text: it.name }), el("div", { class: "pfoot" }, el("span", { class: "pprice", text: money(it.price) }), add))));
-    });
+    arr.slice(0, S.lim).forEach(function (it) { box.appendChild(pdCard(it)); });
     if (!arr.length) box.appendChild(el("div", { class: "empty", style: "grid-column:1/-1", text: "لا نتائج." }));
-    if (arr.length > S.lim) box.appendChild(el("button", { class: "btn ghost", style: "grid-column:1/-1", text: "عرض المزيد", onclick: function () { S.lim += 30; list(); } }));
+    if (arr.length > S.lim) box.appendChild(el("button", { class: "pd-more", style: "grid-column:1/-1", text: "عرض المزيد", onclick: function () { S.lim += 30; list(); } }));
   }
   list();
 }
@@ -1793,21 +2036,30 @@ function openMask(sheet) {
 function sheetHead(title) { return el("div", { class: "shh" }, el("div", { class: "grab" }), el("div", { class: "shr" }, el("div", { class: "shx", text: "✕", onclick: closeSheet }), el("h2", { text: title }))); }
 function goTopup() { closeSheet(); tab("wallet"); }
 function cartSheet() {
-  var sheet = el("div", { class: "sheet psheet" }); openMask(sheet);
+  var sheet = el("div", { class: "sheet psheet pd-sheet" }); openMask(sheet);
   function draw(msg, kind) {
-    sheet.innerHTML = ""; sheet.appendChild(sheetHead("🛍 السلة"));
+    sheet.innerHTML = ""; sheet.appendChild(sheetHead("🛒 سلة الشراء"));
     if (msg) sheet.appendChild(toast(msg, kind));
-    if (!S.cart.length) { sheet.appendChild(el("div", { class: "empty", text: "السلة فاضية." })); return; }
+    if (!S.cart.length) {
+      sheet.appendChild(el("div", { class: "pd-cartempty" }, el("span", { class: "big", text: "🛍" }), el("div", { text: "سلة الشراء فاضية" })));
+      sheet.appendChild(el("div", { class: "sum" },
+        el("div", { class: "row" }, el("span", { text: "رصيدك" }), el("b", { text: money(S.me.balance) })),
+        el("div", { class: "row tot" }, el("span", { text: "الإجمالي" }), el("b", { text: money(0) }))));
+      sheet.appendChild(el("button", { class: "btn ghost", text: "إتمام الطلب — تأكيد الشراء", disabled: "disabled" }));
+      return;
+    }
     var total = 0;
     S.cart.forEach(function (c, i) {
       total += c.price * c.qty;
       sheet.appendChild(el("div", { class: "row", style: "align-items:center" }, el("span", { text: c.qty + " × " + c.name, style: "flex:1" }), el("b", { text: money(c.price * c.qty), style: "direction:ltr" }),
         el("span", { class: "tag", style: "color:var(--bad);cursor:pointer", text: "✕", onclick: function () { S.cart.splice(i, 1); draw(); render(); } })));
     });
-    sheet.appendChild(el("div", { class: "row" }, el("span", { text: "الإجمالي" }), el("b", { text: money(total), style: "direction:ltr" })));
+    sheet.appendChild(el("div", { class: "sum" },
+      el("div", { class: "row" }, el("span", { text: "رصيدك" }), el("b", { text: money(S.me.balance) })),
+      el("div", { class: "row tot" }, el("span", { text: "الإجمالي" }), el("b", { text: money(total) }))));
     var enough = S.me.balance + 0.000001 >= total;
     if (!enough) sheet.appendChild(el("div", { class: "short" }, el("span", { text: "ينقصك " + money(total - S.me.balance) }), el("button", { onclick: goTopup }, eico(ic("topup", "➕"), 18, true), " ", "شحن الرصيد")));
-    var go = el("button", { class: "btn", text: enough ? "اشتري الكل • " + money(total) : "شحن الرصيد • " + money(total - S.me.balance), onclick: function () { if (enough) buyAll(go); else goTopup(); } });
+    var go = el("button", { class: "btn pd-buy", text: enough ? "إتمام الطلب — تأكيد الشراء • " + money(total) : "شحن الرصيد • " + money(total - S.me.balance), onclick: function () { if (enough) buyAll(go); else goTopup(); } });
     sheet.appendChild(go);
   }
   async function buyAll(btn) {
@@ -1830,17 +2082,30 @@ function cartSheet() {
   draw();
 }
 async function openProduct(pid) {
-  var sheet = el("div", { class: "sheet psheet" }, el("div", { class: "sk" }), el("div", { class: "sk" })); openMask(sheet);
+  var sheet = el("div", { class: "sheet psheet pd-sheet" }, el("div", { class: "sk" }), el("div", { class: "sk" })); openMask(sheet);
   var p;
   try { p = (await api("product", { pid: pid })).product; } catch (e) { sheet.innerHTML = ""; sheet.appendChild(el("div", { class: "empty", text: "المنتج غير متاح حاليًا." })); return; }
   var qty = 1;
   function draw(msg, kind) {
     sheet.innerHTML = ""; var total = p.price * qty, bal = S.me.balance;
     sheet.appendChild(sheetHead(p.name));
-    if (kind === "ok") { sheet.appendChild(toast(msg, "ok")); sheet.appendChild(el("button", { class: "btn", text: "تمام", onclick: function () { tg ? tg.close() : closeSheet(); } })); return; }
+    if (kind === "ok") { sheet.appendChild(toast(msg, "ok")); sheet.appendChild(el("button", { class: "btn pd-buy", text: "تمام", onclick: function () { tg ? tg.close() : closeSheet(); } })); return; }
     var body = el("div", { class: "shb" }); sheet.appendChild(body);
-    var th = pThumb(p, "pban"); body.appendChild(th);
-    body.appendChild(el("div", { class: "badges" }, el("span", { class: "bd blue" }, el("span", { text: "تسليم فوري" }), eico(ic("bolt", "⚡"), 16, true)), p.in_stock ? el("span", { class: "bd green" }, eico(ic("box", "📦"), 16, true), el("span", { text: (p.count === null || p.count === undefined ? "∞" : p.count) + " متوفر" })) : el("span", { class: "bd red", text: "غير متوفر" }), p.days ? el("span", { class: "bd", text: p.days + " يوم" }) : null));
+    body.appendChild(pThumb(p, "pd-pban"));
+    body.appendChild(el("div", { class: "pd-tagrow" }, el("span", { class: "pd-off", text: "⭐ منتج رسمي" }),
+      el("span", { class: "pd-rate", text: p.in_stock ? "متوفر — " + (p.delivery || "تسليم فوري") : "غير متوفر حاليًا" })));
+    body.appendChild(el("div", { class: "pd-steps" },
+      el("div", { class: "st on" }, el("i", { text: "1" }), el("span", { text: "اختيار" })),
+      el("div", { class: "ln" }),
+      el("div", { class: "st" }, el("i", { text: "2" }), el("span", { text: "دفع" })),
+      el("div", { class: "ln" }),
+      el("div", { class: "st" }, el("i", { text: "3" }), el("span", { text: "تسليم" }))));
+    var kv = el("div", { class: "pd-kv" });
+    kv.appendChild(el("div", { class: "row" }, el("span", { text: "السعر" }), el("b", { text: money(p.price) })));
+    if (p.days) kv.appendChild(el("div", { class: "row" }, el("span", { text: "المدة" }), el("b", { text: p.days + " يوم" })));
+    kv.appendChild(el("div", { class: "row" }, el("span", { text: "التسليم" }), el("b", { text: p.delivery || "فوري" })));
+    kv.appendChild(el("div", { class: "row" }, el("span", { text: "المتوفر" }), el("b", { text: (p.count === null || p.count === undefined ? "∞" : String(p.count)) })));
+    body.appendChild(kv);
     if (p.desc) { body.appendChild(el("div", { class: "lbl", text: "عن المنتج" })); body.appendChild(el("div", { class: "desc", text: p.desc })); }
     if (msg) body.appendChild(toast(msg, kind));
     if (p.in_stock) {
@@ -1858,11 +2123,11 @@ async function openProduct(pid) {
         el("div", { class: "row tot" }, el("span", { text: "الإجمالي" }), el("b", { text: money(total) }))));
       if (bal + 0.000001 < total) body.appendChild(el("div", { class: "short" }, el("span", { text: "ينقصك " + money(total - bal) + " ⚠" }), el("button", { onclick: goTopup }, eico(ic("topup", "➕"), 18, true), " ", "شحن الرصيد")));
     }
-    var bar = el("div", { class: "bar" });
+    var bar = el("div", { class: "pd-buybar" });
     if (p.in_stock && S.me.wscope === "telegram") bar.appendChild(el("button", { class: "btn ghost", text: "شراء المنتجات من الرصيد متوقف حاليًا", disabled: "disabled" }));
     else if (p.in_stock) {
       var enough = bal + 0.000001 >= total;
-      bar.appendChild(el("button", { class: "btn", text: enough ? "اشتري الآن • " + money(total) : "شحن الرصيد • " + money(total), onclick: function (e) { if (enough) buy(e.currentTarget); else goTopup(); } }));
+      bar.appendChild(el("button", { class: "btn pd-buy", style: "flex:1", text: enough ? "اشترِ الآن • " + money(total) : "شحن الرصيد • " + money(total), onclick: function (e) { if (enough) buy(e.currentTarget); else goTopup(); } }));
       bar.appendChild(el("button", { class: "btn ghost", text: "أضف إلى السلة 🛍", onclick: function () { cartAdd(p, qty); closeSheet(); render(); } }));
     } else bar.appendChild(el("button", { class: "btn ghost", text: "غير متوفر حاليًا", disabled: "disabled" }));
     sheet.appendChild(bar);
@@ -2625,7 +2890,7 @@ async function accountView(v) {
   v.innerHTML = "";
   var tu = (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) || {};
   var nm = ((tu.first_name || d.name || "") + " " + (tu.last_name || "")).trim() || "-";
-  var av = el("div", { class: "avatar" });
+  var av = el("div", { class: "pd-avatar" });
   if (tu.photo_url) { var im = document.createElement("img"); im.src = tu.photo_url; im.alt = ""; im.onerror = function () { im.remove(); av.textContent = nm.charAt(0).toUpperCase(); }; av.appendChild(im); }
   else av.textContent = nm.charAt(0).toUpperCase();
   var prof = el("div", { class: "prof" }, av, el("h2", { text: nm }), el("div", { class: "un", text: d.username ? "@" + d.username : "" }),
@@ -2658,7 +2923,7 @@ async function accountView(v) {
       el("div", { class: "ltx" }, el("b", { text: label })), sub2 ? el("small", { class: "rs", text: sub2, style: "direction:ltr" }) : null, el("span", { class: "chev", text: "‹" })));
   }
   row("help", "🛟", "الدعم الفني", "", function () { oLink(S.me.support); });
-  row("channel", "\U0001f4e2", "القناة", "", function () { oLink(S.me.channel || S.me.owner || S.me.support); });
+  row("channel", "📢", "القناة", "", function () { oLink(S.me.channel || S.me.owner || S.me.support); });
   if (BOT_USER) row("rocket", "🚀", "فتح محادثة البوت", "@" + BOT_USER, function () { oLink("https://t.me/" + BOT_USER); });
   v.appendChild(set);
   v.appendChild(el("div", { class: "lbl", style: "text-align:center;margin-top:14px", text: (S.me.title || "") + " • " + LANG.toUpperCase() }));
@@ -3220,6 +3485,46 @@ function rsDetail(v, d) {
 }
 
 boot();
+
+/* ==========================================================================
+   Dogs Store — Panda-faithful renderers (تستبدل رندرات الواجهة الحالية داخل
+   MINIAPP_HTML، بنفس عقد الـ API والمساعدات: el/money/eico/ic/api/pThumb/
+   cartAdd/trackSheet/sub/tab...). المكوّنات من Panda Store بالحرف، بالألوان
+   الحمراء/السوداء/الذهبية وطابع الكلاب.
+   ========================================================================== */
+var PD_TICK_DONE = false;
+async function pdTickerFill() {
+  var t = document.getElementById("pdTicker"); if (!t || PD_TICK_DONE) return; PD_TICK_DONE = true;
+  var pills = ["Telegram Premium", "نجوم تيليجرام", "TON", "Canva Pro", "CapCut Pro", "هدايا رقمية", "Dogs Store"];
+  try { var r = await api("recent"); if (r && r.items) r.items.forEach(function (x) { pills.push(x.u + " • " + x.t); }); } catch (e) {}
+  pills.concat(pills).forEach(function (p) { t.appendChild(el("span", { class: "pd-pill" }, el("i"), el("span", { text: p }))); });
+}
+function pdSvc(key, g, label, fn) {
+  return el("div", { class: "pd-svc", onclick: function () { buzz(); fn(); } }, el("div", { class: "pd-sic" }, eico(ic(key, g), 30)), el("span", { text: label }));
+}
+function pdCard(it) {
+  var th = pThumb(it, "pd-thumb");
+  th.appendChild(el("span", { class: "pd-badge" + (it.in_stock ? "" : " out"), text: it.in_stock ? "متوفر" : "نفد" }));
+  th.appendChild(el("span", { class: "pd-bolt" }, eico(ic("bolt", "⚡"), 15, true), el("span", { text: "تسليم فوري" })));
+  var add = el("button", { class: "pd-add", text: "+", onclick: function (e) { e.stopPropagation(); if (!it.in_stock) return; cartAdd(it, 1); } });
+  return el("div", { class: "pd-card" + (it.in_stock ? "" : " dim"), onclick: function () { buzz(); openProduct(it.id); } }, th,
+    el("div", { class: "pd-cbody" }, el("div", { class: "pd-cname", text: it.name }),
+      el("div", { class: "pd-cfoot" }, el("span", { class: "pd-price", text: money(it.price) }), add)));
+}
+
+function pdOrdCard(o) {
+  return el("div", { class: "pd-ocard", onclick: function () { trackSheet(o); } },
+    el("div", null, el("div", { class: "nm", text: o.service + " — " + o.item }), el("div", { class: "sub" }, el("span", { text: "FP-" + o.id }), el("span", { text: o.date }), el("span", { class: "tag", text: o.status }))),
+    el("div", { class: "pr", text: money(o.usd) }));
+}
+/* --- Panda shell wiring --- */
+(function () {
+  var c = document.getElementById("pdCart");
+  if (c) c.onclick = function () { buzz(); cartSheet(); };
+  var cn = document.getElementById("cartn");
+  if (cn && typeof cartCount === "function" && cartCount()) { cn.textContent = String(cartCount()); cn.style.display = "grid"; }
+})();
+
 </script>
 </body>
 </html>
