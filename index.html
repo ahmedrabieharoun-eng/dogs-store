@@ -691,6 +691,7 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
 .avatar{background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2px solid var(--pd-gold)}
 .sp-bar i{background:var(--pd-grad)}
 .tick{border:1.5px solid var(--pd-line);background:var(--pd-card);border-radius:999px}
+.mask{z-index:90} /* الشيتات فوق الهيدر وشريط التنقّل العائم دائمًا */
 
 </style>
 </head>
@@ -1636,7 +1637,21 @@ function renderHome(v) {
   sv.appendChild(pdSvc("ton", "💎", "شراء TON", function () { sub(tonBuyView); }));
   sv.appendChild(pdSvc("sell", "🔁", "بيع نجوم", function () { sub(sellView); }));
   v.appendChild(sv);
-  if (!S.cat) { v.appendChild(el("div", { class: "sk" })); return; }
+  if (!S.cat) {
+    /* boot() يُعيد رسم الرئيسية بعد state لكنه لا يرسمها بعد وصول الكتالوج
+       (يرسم المتجر فقط) — فالصفحة تراقب وصول الكتالوج وترسم نفسها. */
+    v.appendChild(el("div", { class: "sk" }));
+    if (PD_CAT_IV) clearInterval(PD_CAT_IV);
+    var tries = 0;
+    PD_CAT_IV = setInterval(function () {
+      tries++;
+      if (S.cat || tries > 25) {
+        clearInterval(PD_CAT_IV); PD_CAT_IV = null;
+        if (S.cat && S.tab === "home" && !S.svc) render();
+      }
+    }, 600);
+    return;
+  }
   if (S.cat.hidden || !S.cat.providers.length) { v.appendChild(el("div", { class: "empty", text: S.cat.hidden ? "المتجر سيُفتح قريبًا." : "لا توجد منتجات متاحة حاليًا." })); return; }
   var total = 0; S.cat.providers.forEach(function (p) { total += p.items.length; });
   var chips = el("div", { class: "pd-chips" });
@@ -3493,6 +3508,7 @@ boot();
    الحمراء/السوداء/الذهبية وطابع الكلاب.
    ========================================================================== */
 var PD_TICK_DONE = false;
+var PD_CAT_IV = null;
 async function pdTickerFill() {
   var t = document.getElementById("pdTicker"); if (!t || PD_TICK_DONE) return; PD_TICK_DONE = true;
   var pills = ["Telegram Premium", "نجوم تيليجرام", "TON", "Canva Pro", "CapCut Pro", "هدايا رقمية", "Dogs Store"];

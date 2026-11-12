@@ -678,3 +678,4 @@ html[dir=rtl] .hmid b{text-align:right}html[dir=ltr] .hmid b{text-align:left}
 .avatar{background:linear-gradient(135deg,#e02626,#8f0f14 55%,#d4af37);border:2px solid var(--pd-gold)}
 .sp-bar i{background:var(--pd-grad)}
 .tick{border:1.5px solid var(--pd-line);background:var(--pd-card);border-radius:999px}
+.mask{z-index:90} /* الشيتات فوق الهيدر وشريط التنقّل العائم دائمًا */
